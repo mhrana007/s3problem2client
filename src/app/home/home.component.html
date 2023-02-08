@@ -1,0 +1,76 @@
+<div style="padding: 13px;">
+
+  <mat-card>
+    <mat-card-header>S3 Technical Assessment</mat-card-header>
+    <mat-card-content>
+        
+      <form (ngSubmit)="search()" autocomplete="off">
+        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+          <mat-form-field>
+            <mat-label>Building</mat-label>
+            <mat-select name="BuildingId" [(ngModel)]="BuildingId">
+              <mat-option *ngFor="let obj of buildingdropdown" [value]="obj.Id">
+                <span>{{obj.Name}}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Object</mat-label>
+            <mat-select name="ObjectId" [(ngModel)]="ObjectId">
+              <mat-option *ngFor="let obj of objectdropdown" [value]="obj.Id">
+                <span>{{obj.Name}}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Datafield</mat-label>
+            <mat-select name="DataField" [(ngModel)]="DataField">
+              <mat-option *ngFor="let obj of datafielddropdown" [value]="obj.Id">
+                <span>{{obj.Name}}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Data Range</mat-label>
+            <mat-date-range-input [rangePicker]="picker" name="DateRange" >
+              <input matStartDate placeholder="Start date"  name="StartDateRange" [(ngModel)]="StartDateRange">
+              <input matEndDate placeholder="End date"  name="EndDateRange" [(ngModel)]="EndDateRange">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" style="margin-left: 15px;">Search</button>
+        </div>
+  
+  
+      </form>
+  
+  <div class="row">
+    <ng-container *ngIf="chart !== null && chart !== undefined">
+        <apx-chart
+        [series]="series"
+        [chart]="chart"
+        [dataLabels]="dataLabels"
+        [markers]="markers"
+        [title]="title"
+        [fill]="fill"
+        [yaxis]="yaxis"
+        [xaxis]="xaxis"
+        [tooltip]="tooltip"
+        [autoUpdateSeries]="true"
+      ></apx-chart>
+    </ng-container>
+    
+  </div>
+  
+      <!-- <div class="printactions" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+        <button mat-raised-button class="btnPrint" (click)="onPrint()">Print</button>
+      </div> -->
+  
+    </mat-card-content>
+  </mat-card>
+</div>
